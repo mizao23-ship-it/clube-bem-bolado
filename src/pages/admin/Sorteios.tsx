@@ -788,7 +788,7 @@ function SortearModal({ item, onClose }: { item: ExpWithSorteio; onClose: () => 
 
     // Chama edge function server-side (sorteio + email num único call)
     const sorteioPromise = fetch(
-      'https://ctnjluwpblbarwiysrsw.supabase.co/functions/v1/realizar-sorteio',
+      `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/realizar-sorteio`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'apikey': ANON_KEY, 'Authorization': `Bearer ${ANON_KEY}` },

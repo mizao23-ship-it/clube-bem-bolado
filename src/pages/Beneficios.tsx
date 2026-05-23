@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
+import { supabase } from '@/lib/supabase'
 import MemberHeader from '@/components/member/MemberHeader'
 import MemberFooter from '@/components/member/MemberFooter'
 import MemberCardBadge from '@/components/member/MemberCardBadge'
@@ -263,6 +264,19 @@ function revalidateInBackground() {
   fetchFromApi().then(writeCache).catch(() => { /* silencioso */ })
 }
 
+async function fetchFromDbCache(): Promise<NvOffer[] | null> {
+  try {
+    const { data } = await supabase
+      .from('nv_offers_cache')
+      .select('data')
+      .eq('key', 'main')
+      .maybeSingle()
+    if (!data?.data) return null
+    const offers = Array.isArray(data.data) ? data.data : (data.data as any)?.data ?? []
+    return deduplicateOffers(offers as NvOffer[])
+  } catch { return null }
+}
+
 async function loadOffers(): Promise<NvOffer[]> {
   const now = Date.now()
 
@@ -282,10 +296,20 @@ async function loadOffers(): Promise<NvOffer[]> {
     return localEntry.data
   }
 
-  // L3 — fetch bloqueante (só na 1ª visita ever ou após 2h sem uso)
-  const data = await fetchFromApi()
-  writeCache(data)
-  return data
+  // L3 — edge function; se falhar, usa cache do banco
+  try {
+    const data = await fetchFromApi()
+    writeCache(data)
+    return data
+  } catch {
+    const dbData = await fetchFromDbCache()
+    if (dbData !== null) {
+      writeCache(dbData)
+      return dbData
+    }
+    // Sem dados em lugar nenhum — retorna array vazio (sem erro)
+    return []
+  }
 }
 
 /* ── Página principal ── */
@@ -453,7 +477,11 @@ export default function Beneficios() {
             </button>
           </div>
         ) : filtered.length === 0 ? (
-          <div className={styles.empty}>Nenhum benefício encontrado.</div>
+          <div className={styles.empty}>
+            {offers.length === 0
+              ? '🎁 Benefícios exclusivos em breve. Fique ligado!'
+              : 'Nenhum benefício encontrado.'}
+          </div>
         ) : (
           <>
             <div className={styles.grid}>
