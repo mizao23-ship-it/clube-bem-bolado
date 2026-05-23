@@ -149,18 +149,6 @@ export default function RegisterForm({ onSwitch }: Props) {
             if (error) console.warn('[sync-newvalue]', error.message)
           })
 
-        // 4. Sync RD Station (fire-and-forget)
-        supabase.functions
-          .invoke('sync-rdstation', {
-            body: {
-              nome:      nome.trim(),
-              email:     email.trim().toLowerCase(),
-              telefone:  telefone.trim() || null,
-            },
-          })
-          .then(({ error }) => {
-            if (error) console.warn('[sync-rdstation]', error.message)
-          })
       }
 
       // 5. Log de cadastro no auth_logs
