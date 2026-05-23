@@ -1,0 +1,227 @@
+/* ── Overlay ── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.60);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  backdrop-filter: blur(3px);
+}
+
+/* ── Card ── */
+.card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  flex-direction: column;
+  animation: slideUp .3s cubic-bezier(.22,1,.36,1);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(24px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* ── Close button ── */
+.closeX {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(255,255,255,.12);
+  border: none;
+  font-size: 20px;
+  line-height: 1;
+  color: rgba(255,255,255,.8);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background .15s;
+  z-index: 1;
+}
+.closeX:hover {
+  background: rgba(255,255,255,.22);
+  color: #fff;
+}
+
+/* ── Header ── */
+.header {
+  background: linear-gradient(135deg, var(--purple) 0%, var(--accent) 100%);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.catTag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  color: rgba(255,255,255,.75);
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.25;
+  letter-spacing: -.02em;
+}
+
+/* ── Info grid ── */
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 16px 20px;
+  background: var(--surface-2);
+}
+
+@media (max-width: 400px) {
+  .infoGrid { grid-template-columns: 1fr; }
+}
+
+.infoBox {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+}
+
+.infoBoxHighlight {
+  border-color: var(--purple);
+  background: var(--purple-bg);
+}
+
+.infoLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  color: var(--text-3);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.infoValue {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-1);
+  line-height: 1.4;
+}
+
+/* ── Termo box ── */
+.termoBox {
+  margin: 0 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.termoLabel {
+  background: var(--surface-2);
+  padding: 8px 14px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  color: var(--text-3);
+  text-transform: uppercase;
+}
+
+.termoText {
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.65;
+  max-height: 140px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+/* ── Checkbox ── */
+.checkLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0 20px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+
+.checkbox {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  accent-color: var(--purple);
+  cursor: pointer;
+}
+
+/* ── Actions ── */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 20px 20px;
+}
+
+.btnConfirmar {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, var(--purple), var(--accent));
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity .15s, transform .15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  box-shadow: 0 4px 14px rgba(126,0,229,.35);
+}
+.btnConfirmar:hover:not(:disabled) {
+  opacity: .88;
+  transform: translateY(-1px);
+}
+.btnConfirmar:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btnFechar {
+  width: 100%;
+  padding: 11px;
+  background: none;
+  border: 1.5px solid var(--border-2);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: border-color .15s, color .15s;
+}
+.btnFechar:hover {
+  border-color: var(--purple);
+  color: var(--purple);
+}

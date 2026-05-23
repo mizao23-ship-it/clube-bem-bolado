@@ -1,0 +1,41 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 14px;
+  padding: 14px 24px;
+  backdrop-filter: blur(8px);
+}
+
+.stat { text-align: center; }
+
+.num {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,.55);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.divider {
+  width: 1px;
+  height: 36px;
+  background: rgba(255,255,255,.15);
+}
+
+@media (max-width: 600px) {
+  .statIndicacoes   { display: none; }
+  .dividerIndicacoes { display: none; }
+}

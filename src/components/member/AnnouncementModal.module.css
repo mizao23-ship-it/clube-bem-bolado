@@ -1,0 +1,387 @@
+/* ═══════════════════════════════════════════
+   AnnouncementModal — Stories UI
+   ═══════════════════════════════════════════ */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+/* ── Fundo desfocado global ── */
+.blurBg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-color: #0a0020;
+  filter: blur(40px) brightness(0.3);
+  transform: scale(1.08);
+  z-index: 0;
+}
+
+/* ── Shell (card) ── */
+.shell {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  border-radius: 28px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7);
+  animation: fadeScale .4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Shell mais largo para vídeo */
+.shellVideo {
+  max-width: min(680px, 92vw);
+}
+
+.shellBg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-color: #0a0020;
+  filter: blur(28px) brightness(0.25);
+  transform: scale(1.08);
+  z-index: 0;
+}
+
+@keyframes fadeScale {
+  from { transform: scale(0.94); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+/* ── Barra de progresso — CSS animation (zero JS, sem lag) ── */
+.progressRow {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  gap: 4px;
+  padding: 14px 14px 6px;
+  flex-shrink: 0;
+}
+
+.progressTrack {
+  flex: 1;
+  height: 3px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+}
+
+/* Barra passada (100% preenchida) */
+.progressFillPast {
+  height: 100%;
+  background: #fff;
+  width: 100%;
+}
+
+/* Barra atual (anima via CSS — sem JS) */
+.progressFillCurrent {
+  height: 100%;
+  background: #fff;
+  width: 0%;
+  animation: fillProgress 15s linear forwards;
+}
+
+/* Barra futura (vazia) */
+.progressFillFuture {
+  height: 100%;
+  width: 0%;
+}
+
+@keyframes fillProgress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* ── Botão Pular ── */
+.skipBtn {
+  position: absolute;
+  top: 44px;
+  right: 14px;
+  z-index: 4;
+  background: rgba(0, 0, 0, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-body, system-ui);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 13px;
+  border-radius: 99px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  letter-spacing: .02em;
+  transition: background .15s, color .15s;
+  animation: fadeIn .3s ease;
+}
+.skipBtn:hover {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Área de imagem ── */
+.mediaArea {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-height: 180px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mediaImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Área de vídeo YouTube (16:9) ── */
+.videoArea {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-top: 56.25%;
+  background: #000;
+  flex-shrink: 0;
+}
+
+.videoIframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ── Painel inferior ── */
+.panel {
+  position: relative;
+  z-index: 2;
+  padding: 18px 22px 24px;
+  background: linear-gradient(
+    to top,
+    rgba(4, 0, 20, 0.97) 0%,
+    rgba(4, 0, 20, 0.85) 100%
+  );
+  text-align: center;
+  flex-shrink: 0;
+  overflow-y: auto;
+  max-height: 52vh;
+}
+
+/* ── Título ── */
+.title {
+  font-family: var(--font-heading, system-ui);
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 6px;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+/* ── Descrição ── */
+.sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+
+/* ── Actions ── */
+.actions {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: fadeIn .35s ease;
+}
+
+/* ── Desktop notice ── */
+.desktopNotice {
+  background: rgba(255, 237, 213, 0.1);
+  border: 1px solid rgba(253, 215, 170, 0.25);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #fed7aa;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+/* ── Botão primário ── */
+.btnPrimary {
+  width: 100%;
+  background: linear-gradient(135deg, var(--purple, #7E00E5), var(--accent, #4D0798));
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 14px;
+  font-family: var(--font-body, system-ui);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity .15s, transform .15s;
+  box-shadow: 0 4px 20px rgba(126, 0, 229, 0.45);
+  letter-spacing: -.01em;
+}
+.btnPrimary:hover  { opacity: .88; transform: translateY(-1px); }
+.btnPrimary:active { transform: translateY(0); }
+
+/* ── Referral: caixa do link ── */
+.refLinkBox {
+  background: rgba(126, 0, 229, 0.15);
+  border: 1.5px dashed rgba(196, 181, 253, 0.4);
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.refLinkText {
+  font-size: 12px;
+  color: #c4b5fd;
+  font-weight: 600;
+  font-family: monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.refLinkLabel {
+  font-size: 10px;
+  color: #a78bfa;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Referral: WhatsApp ── */
+.btnWhatsApp {
+  width: 100%;
+  padding: 14px;
+  background: #25D366;
+  border: none;
+  border-radius: 14px;
+  color: #fff;
+  font-family: var(--font-body, system-ui);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: filter .15s, transform .15s;
+}
+.btnWhatsApp:hover  { filter: brightness(1.08); transform: translateY(-1px); }
+.btnWhatsApp:active { transform: translateY(0); }
+
+/* ── Referral: copiar ── */
+.btnCopy {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  border: 2px solid rgba(126, 0, 229, 0.6);
+  border-radius: 14px;
+  color: #c4b5fd;
+  font-family: var(--font-body, system-ui);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s, transform .15s;
+}
+.btnCopy:hover  { background: rgba(126, 0, 229, 0.2); transform: translateY(-1px); }
+.btnCopy:active { transform: translateY(0); }
+
+.btnCopyDone {
+  width: 100%;
+  padding: 14px;
+  background: #10b981;
+  border: 2px solid #10b981;
+  border-radius: 14px;
+  color: #fff;
+  font-family: var(--font-body, system-ui);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: default;
+}
+
+/* ── Referral: rodapé ── */
+.refFootnote {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.38);
+  line-height: 1.5;
+}
+
+/* ══════════════════════════════════════
+   MOBILE — tela completamente cheia
+   ══════════════════════════════════════ */
+@media (max-width: 600px) {
+  .overlay {
+    align-items: stretch;
+    justify-content: stretch;
+  }
+
+  .shell {
+    max-width: 100%;
+    max-height: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .shellVideo {
+    max-width: 100%;
+  }
+
+  .progressRow {
+    padding-top: calc(14px + env(safe-area-inset-top, 0px));
+  }
+
+  .skipBtn {
+    top: calc(44px + env(safe-area-inset-top, 0px));
+  }
+
+  .mediaArea {
+    min-height: 0;
+    flex: 0 0 auto;        /* não expande — ocupa só o que a imagem precisa */
+    max-height: 48vh;      /* nunca passa de metade da tela */
+  }
+
+  /* Imagem inteira visível no mobile — fundo desfocado preenche as bordas */
+  .mediaImg {
+    object-fit: contain;
+    max-height: 48vh;
+  }
+
+  .panel {
+    flex: 1;               /* painel cresce para preencher o restante */
+    max-height: none;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
+  }
+
+  .title { font-size: 17px; }
+  .sub   { font-size: 12.5px; }
+}

@@ -1,0 +1,231 @@
+/* ── Botão criar conta — fonte Bebas Neue ── */
+.submitBtnPacaembu {
+  font-family: var(--font-heading) !important;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+/* ── Seção acadêmica ── */
+.academicSection {
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+  padding-top: 20px;
+  margin-bottom: 4px;
+}
+
+.academicLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 16px;
+}
+
+/* ── Combobox ── */
+.comboWrap {
+  position: relative;
+}
+
+.comboInput {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 0 12px;
+  background: var(--surface);
+  transition: border-color .15s;
+  min-height: 42px;
+}
+
+.comboInput:focus-within {
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(126, 0, 229, .1);
+}
+
+.comboSelected {
+  border-color: var(--purple);
+}
+
+.comboIcon {
+  color: var(--text-3);
+  flex-shrink: 0;
+}
+
+.comboText {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  color: var(--text-1);
+  outline: none;
+  padding: 10px 0;
+  min-width: 0;
+  font-family: inherit;
+}
+
+.comboText::placeholder {
+  color: var(--text-3);
+}
+
+.comboClear {
+  background: none;
+  border: none;
+  color: var(--text-3);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color .15s;
+}
+.comboClear:hover { color: var(--text-1); }
+
+.comboList {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 100;
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+}
+
+.comboItem {
+  padding: 9px 12px;
+  font-size: 13.5px;
+  color: var(--text-1);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background .1s;
+}
+.comboItem:hover { background: var(--bg); }
+.comboItemActive {
+  background: var(--purple-bg);
+  color: var(--purple);
+  font-weight: 600;
+}
+
+.comboEmpty {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 13px;
+  color: var(--text-3);
+  text-align: center;
+  z-index: 100;
+}
+
+/* ── Password visibility toggle ── */
+.pwWrap {
+  position: relative;
+}
+
+.pwWrap :global(.input) {
+  padding-right: 40px;
+}
+
+.eyeBtn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  transition: color .15s;
+}
+.eyeBtn:hover { color: var(--text-1); }
+
+/* ── Força da senha ── */
+.strengthWrap {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.strengthBars {
+  display: flex;
+  gap: 4px;
+}
+
+.strengthBar {
+  flex: 1;
+  height: 4px;
+  border-radius: 99px;
+  background: var(--border);
+  transition: background .2s;
+}
+
+.strengthBar[data-active='1'] { background: #ef4444; }
+.strengthBar[data-active='2'] { background: #f97316; }
+.strengthBar[data-active='3'] { background: #eab308; }
+.strengthBar[data-active='4'] { background: #22c55e; }
+
+.strengthLabel {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-3);
+}
+.strengthLabel[data-score='1'] { color: #ef4444; }
+.strengthLabel[data-score='2'] { color: #f97316; }
+.strengthLabel[data-score='3'] { color: #eab308; }
+.strengthLabel[data-score='4'] { color: #22c55e; }
+
+.strengthHint {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 1px;
+  line-height: 1.5;
+}
+
+/* ── Pills de semestre ── */
+.pillsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.pill {
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text-2);
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: all .15s;
+  min-width: 48px;
+  text-align: center;
+}
+.pill:hover {
+  border-color: var(--purple);
+  color: var(--purple);
+}
+.pillActive {
+  background: var(--purple);
+  border-color: var(--purple);
+  color: #fff;
+}

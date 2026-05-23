@@ -1,0 +1,417 @@
+/* ── Page Header ── */
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+/* ── Empty state ── */
+.empty {
+  text-align: center;
+  padding: 60px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+/* ── Announcement list ── */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Announcement card ── */
+.anuncioCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  transition: box-shadow 0.15s;
+}
+.anuncioCard:hover {
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 640px) {
+  .anuncioCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ── Media preview thumbnail ── */
+.mediaPreview {
+  flex-shrink: 0;
+  width: 80px;
+  height: 60px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+.mediaPreview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Card info ── */
+.cardInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+/* ── Tipo badge ── */
+.tipoBadge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.prioTag {
+  font-size: 11px;
+  color: var(--text-3);
+  font-weight: 600;
+}
+
+.cardNome {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardTitulo {
+  font-size: 13px;
+  color: var(--text-2);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+/* ── Card actions ── */
+.cardActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+/* ── Active toggle button ── */
+.toggleBtn {
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1.5px solid;
+  transition: background 0.15s, color 0.15s;
+}
+.toggleOn {
+  background: var(--success-bg);
+  color: var(--success);
+  border-color: var(--success);
+}
+.toggleOff {
+  background: var(--surface-2);
+  color: var(--text-3);
+  border-color: var(--border-2);
+}
+.toggleBtn:hover {
+  opacity: 0.82;
+}
+
+/* ── Modal overlay ── */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.60);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  backdrop-filter: blur(3px);
+}
+
+/* ── Modal ── */
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-xl);
+  animation: slideUp 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* ── Confirm modal ── */
+.confirmModal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 380px;
+  padding: 28px 24px 24px;
+  box-shadow: var(--shadow-xl);
+  animation: slideUp 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Modal header ── */
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.modalTitle {
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text-1);
+}
+
+.modalClose {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: var(--text-3);
+  cursor: pointer;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+.modalClose:hover {
+  color: var(--text-1);
+  background: var(--surface-2);
+}
+
+/* ── Modal body ── */
+.modalBody {
+  padding: 20px 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* ── Modal footer ── */
+.modalFooter {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  padding: 16px 24px 20px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+/* ── Form elements ── */
+.formGroup {
+  margin-bottom: 16px;
+}
+.formGroup label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-2);
+  margin-bottom: 6px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 480px) {
+  .formRow { grid-template-columns: 1fr; }
+}
+
+.radioRow {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-1);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.checkLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-1);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* ── Course pills ── */
+.pillsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--purple-bg);
+  color: var(--purple-txt);
+  border: 1px solid var(--purple);
+  border-radius: 999px;
+  padding: 3px 10px 3px 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pillRemove {
+  background: none;
+  border: none;
+  color: var(--purple-txt);
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  padding: 0 2px;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+.pillRemove:hover { opacity: 1; }
+
+/* ── Course dropdown ── */
+.cursoDropdown {
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius);
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 4px;
+  box-shadow: var(--shadow);
+}
+
+.cursoOption {
+  padding: 9px 14px;
+  font-size: 13px;
+  color: var(--text-1);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.cursoOption:hover {
+  background: var(--surface-2);
+}
+
+/* ── Form section divider ── */
+.formSection {
+  margin: 20px 0 14px;
+  border-top: 1px solid var(--border);
+  padding-top: 18px;
+}
+.formSection:first-child {
+  margin-top: 0;
+  border-top: none;
+  padding-top: 0;
+}
+
+.formSectionTitle {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 14px;
+}
+
+/* ── Inline checkbox row ── */
+.inlineCheckRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--surface-2);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-1);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* ── Image preview ── */
+.imagePreviewWrap {
+  margin-bottom: 10px;
+}
+
+.imagePreview {
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.removeImageBtn {
+  background: none;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  border-radius: var(--radius);
+  padding: 5px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.removeImageBtn:hover {
+  background: var(--danger-bg);
+}

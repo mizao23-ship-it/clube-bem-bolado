@@ -1,0 +1,140 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+}
+
+.card {
+  position: relative;
+  background: var(--surface, #fff);
+  border-radius: 24px;
+  max-width: 400px;
+  width: 92%;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+  animation: pop .4s cubic-bezier(.22,1,.36,1);
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 95%;
+    border-radius: 20px;
+  }
+}
+
+@keyframes pop {
+  from { transform: scale(.82); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.closeX {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: rgba(0,0,0,.35);
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: background .15s;
+}
+.closeX:hover { background: rgba(0,0,0,.55); }
+
+.banner {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  max-height: 260px;
+}
+
+@media (max-width: 480px) {
+  .banner { max-height: 180px; }
+}
+
+.body {
+  padding: 24px 28px 28px;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .body { padding: 20px 18px 22px; }
+}
+
+.title {
+  font-family: var(--font-heading, system-ui);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-1, #111);
+  margin-bottom: 8px;
+}
+
+@media (max-width: 480px) {
+  .title { font-size: 18px; }
+}
+
+.sub {
+  font-size: 14px;
+  color: var(--text-2, #6b7280);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 480px) {
+  .sub { font-size: 13px; margin-bottom: 18px; }
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btnPrimary {
+  background: linear-gradient(135deg, #ea1d2c, #ff4757);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 13px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity .15s;
+  box-shadow: 0 4px 14px rgba(234,29,44,.35);
+}
+.btnPrimary:hover { opacity: .88; }
+
+.btnSecondary {
+  background: none;
+  border: none;
+  color: var(--text-3, #9ca3af);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px;
+  transition: color .15s;
+}
+.btnSecondary:hover { color: var(--text-2, #6b7280); }
+
+.desktopNotice {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #c2410c;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  text-align: left;
+}

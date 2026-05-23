@@ -1,0 +1,54 @@
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  gap: 16px;
+}
+
+.searchBar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.searchWrap {
+  flex: 1;
+  position: relative;
+}
+
+.searchWrap svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-3);
+  pointer-events: none;
+}
+
+.searchWrap :global(.input) { padding-left: 37px; }
+
+.tableWrap {
+  overflow-x: auto;
+  border-radius: var(--radius);
+}
+
+.tableWrap table th,
+.tableWrap table td {
+  padding: 14px 20px;
+  white-space: nowrap;
+}
+
+.actions {
+  display: flex;
+  gap: 5px;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.actionBtn {
+  font-size: 11px;
+  padding: 4px 9px;
+  white-space: nowrap;
+  border-radius: 8px;
+}

@@ -1,0 +1,111 @@
+/* ═══════════════════════════════════════════════════
+   CLUBE BEM BOLADO — DESIGN TOKENS
+   Fonte canônica de cores, tipografia, espaçamentos
+   e sombras para front (membros) + backoffice (admin).
+═══════════════════════════════════════════════════ */
+
+:root {
+  --font-body:    'Plus Jakarta Sans', 'Nunito', system-ui, sans-serif;
+  --font-heading: 'Bebas Neue', 'Syne', 'Nunito', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+}
+
+/* ══════════════════════════════
+   TEMA CLARO (padrão)
+══════════════════════════════ */
+[data-theme="light"], :root {
+  /* Backgrounds */
+  --bg:           #f9f9f9;
+  --surface:      #ffffff;
+  --surface-2:    #f4f0fb;
+  --surface-3:    #ece6f8;
+
+  /* Borders */
+  --border:       #e0daea;
+  --border-2:     #c8c8c8;
+
+  /* Text */
+  --text-1:       #1a0040;
+  --text-2:       #4d0798;
+  --text-3:       #9b93b8;
+
+  /* Sombras — flat-first (Bem Bolado) */
+  --shadow:       0 1px 3px rgba(77,7,152,.04), 0 2px 8px rgba(77,7,152,.06);
+  --shadow-md:    0 4px 16px rgba(77,7,152,.10);
+  --shadow-lg:    0 8px 32px rgba(77,7,152,.12);
+  --shadow-xl:    0 16px 48px rgba(126,0,229,.18);
+
+  /* Marca — Bem Bolado purple */
+  --purple:       #7E00E5;
+  --purple-2:     #4D0798;
+  --purple-bg:    #f0e6ff;
+  --purple-txt:   #4D0798;
+
+  /* Acento — mesmo purple vibrante */
+  --accent:       #7E00E5;
+  --accent-light: #efe0ff;
+
+  /* Semânticos */
+  --success:      #059669;
+  --success-bg:   #ecfdf5;
+  --warning:      #d97706;
+  --warning-bg:   #fffbeb;
+  --danger:       #dc2626;
+  --danger-bg:    #fef2f2;
+  --amber:        #d97706;
+
+  /* Componentes específicos */
+  --bar-fill:     #d4b0ff;
+  --bar-hover:    #9b5de5;
+  --code-bg:      #f3e8ff;
+  --code-txt:     #4D0798;
+
+  /* Border-radius — Bem Bolado: botões pill, cards flat */
+  --radius:       8px;
+  --radius-lg:    16px;
+  --radius-xl:    24px;
+  --radius-pill:  250px;
+}
+
+/* ══════════════════════════════
+   TEMA ESCURO
+══════════════════════════════ */
+[data-theme="dark"] {
+  --bg:           #0a0018;
+  --surface:      #130030;
+  --surface-2:    #1c0045;
+  --surface-3:    #25005a;
+
+  --border:       rgba(255,255,255,.07);
+  --border-2:     rgba(255,255,255,.13);
+
+  --text-1:       #f0e8ff;
+  --text-2:       rgba(240,232,255,.60);
+  --text-3:       rgba(240,232,255,.30);
+
+  --shadow:       0 1px 3px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
+  --shadow-md:    0 8px 32px rgba(0,0,0,.4);
+  --shadow-lg:    0 8px 40px rgba(0,0,0,.5);
+  --shadow-xl:    0 20px 60px rgba(0,0,0,.6);
+
+  --purple:       #b44fff;
+  --purple-2:     #d194ff;
+  --purple-bg:    rgba(126,0,229,.15);
+  --purple-txt:   #d194ff;
+
+  --accent:       #b44fff;
+  --accent-light: rgba(180,79,255,.12);
+
+  --success:      #34d399;
+  --success-bg:   rgba(52,211,153,.1);
+  --warning:      #fbbf24;
+  --warning-bg:   rgba(251,191,36,.1);
+  --danger:       #f87171;
+  --danger-bg:    rgba(248,113,113,.1);
+  --amber:        #fbbf24;
+
+  --bar-fill:     rgba(126,0,229,.3);
+  --bar-hover:    rgba(180,79,255,.5);
+  --code-bg:      rgba(126,0,229,.15);
+  --code-txt:     #d194ff;
+}

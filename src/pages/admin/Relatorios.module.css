@@ -1,0 +1,30 @@
+.header { margin-bottom: 28px; }
+
+.reportCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all .2s;
+  box-shadow: var(--shadow);
+}
+
+.reportCard:hover {
+  border-color: var(--purple);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.rcIcon { font-size: 22px; margin-bottom: 12px; }
+
+.rcTitle {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-1);
+  margin-bottom: 6px;
+  letter-spacing: -.02em;
+}
+
+.rcDesc { font-size: 12.5px; color: var(--text-2); line-height: 1.55; font-weight: 400; }

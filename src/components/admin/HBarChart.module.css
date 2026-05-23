@@ -1,0 +1,92 @@
+.chart {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  transition: filter .15s;
+}
+
+.row:hover { filter: brightness(.97); }
+
+.rank {
+  font-size: 12px;
+  font-weight: 800;
+  width: 26px;
+  flex-shrink: 0;
+  text-align: center;
+  letter-spacing: -.02em;
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.topRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -.01em;
+}
+
+.stats {
+  font-size: 11.5px;
+  color: var(--text-3);
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stats strong {
+  color: var(--text-1);
+  font-weight: 700;
+}
+
+.share {
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(0,0,0,.06);
+  border-radius: 100px;
+  padding: 1px 7px;
+}
+
+.barWrap {
+  height: 6px;
+  background: rgba(0,0,0,.07);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  border-radius: 100px;
+  min-width: 6px;
+  transition: width .6s cubic-bezier(.4,0,.2,1);
+}
+
+.empty {
+  font-size: 13px;
+  color: var(--text-3);
+  text-align: center;
+  padding: 24px 0;
+}

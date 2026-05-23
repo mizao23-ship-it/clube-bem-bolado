@@ -1,0 +1,122 @@
+.header {
+  background: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.logoWrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.logoImg {
+  height: 36px;
+  width: auto;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.navLink {
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 8px;
+  transition: all .15s;
+}
+
+.navLink:hover { background: #f3f4f6; color: #111827; }
+.navLink.active { background: #f3f0ff; color: #7E00E5; font-weight: 600; }
+
+.userArea {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.avatarBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px;
+  border-radius: 10px;
+  transition: background 0.15s;
+}
+.avatarBtn:hover {
+  background: #f3f0ff;
+}
+.avatarBtn:hover .userName {
+  color: #7E00E5;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7E00E5, #4D0798);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.userName {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.logoutBtn {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 5px 12px;
+  transition: all .15s;
+}
+
+.logoutBtn:hover { background: #e5e7eb; color: #111827; }
+
+@media (max-width: 600px) {
+  .inner { padding: 0 12px; gap: 8px; }
+  .userName { display: none; }
+  .navLink { padding: 6px 10px; font-size: 12.5px; }
+  .logoImg { height: 28px; }
+  /* Sair some do header no mobile — logout fica na página de Perfil */
+  .logoutBtn { display: none; }
+}

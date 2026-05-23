@@ -1,0 +1,24 @@
+@keyframes authFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  padding: 40px 40px 36px;
+  width: 100%;
+  max-width: 460px;
+}
+
+.formWrap {
+  /* chave de animação está no inline style no component */
+}
+
+@media (max-width: 520px) {
+  .card {
+    padding: 32px 24px 28px;
+    border-radius: var(--radius-lg);
+  }
+}

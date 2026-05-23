@@ -1,0 +1,61 @@
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  gap: 16px;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+/* Painéis lado a lado — mesma altura garantida */
+.bottomGrid {
+  display: flex;
+  gap: 18px;
+  align-items: stretch;
+  margin-bottom: 18px;
+}
+
+.bottomGrid > * {
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 0 !important;  /* cancela o margin-bottom global do .card */
+}
+
+.feedItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.feedItem:last-child { border-bottom: none; }
+
+.feedIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.fi-signup { background: var(--purple-bg); }
+.fi-refer  { background: var(--success-bg); }
+.fi-lottery{ background: var(--warning-bg); }
+.fi-winner { background: #fefce8; }
+
+.feedText { flex: 1; font-size: 12.5px; font-weight: 500; color: var(--text-1); line-height: 1.4; }
+.feedTime { font-size: 11px; color: var(--text-3); white-space: nowrap; font-weight: 400; }
+
+@media (max-width: 900px) {
+  .metricsGrid { grid-template-columns: repeat(2, 1fr); }
+}

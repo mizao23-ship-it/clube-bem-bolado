@@ -1,0 +1,27 @@
+.chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 88px;
+}
+
+.col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.bar {
+  width: 100%;
+  background: var(--bar-fill);
+  border-radius: 5px 5px 0 0;
+  cursor: pointer;
+  transition: background .15s;
+  min-height: 4px;
+}
+
+.bar:hover { background: var(--bar-hover); }
+
+.lbl { font-size: 10px; color: var(--text-3); font-weight: 500; }

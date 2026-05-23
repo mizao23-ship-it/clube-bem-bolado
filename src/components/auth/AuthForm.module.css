@@ -1,0 +1,113 @@
+.header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.logoImg {
+  height: 44px;
+  width: auto;
+  display: block;
+  margin: 0 auto 16px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-1);
+  letter-spacing: -.04em;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 13.5px;
+  color: var(--text-2);
+  font-weight: 400;
+}
+
+.errorBox {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.successBox {
+  background: var(--success-bg);
+  color: var(--success);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.forgotWrap {
+  text-align: right;
+  margin-top: -8px;
+  margin-bottom: 18px;
+}
+
+.submitBtn {
+  width: 100%;
+  justify-content: center;
+  padding: 14px;
+  font-size: 14px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 18px;
+  height: 52px;
+}
+
+.switchLink {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-2);
+  font-weight: 400;
+}
+
+.linkBtn {
+  background: none;
+  border: none;
+  color: var(--purple);
+  font-size: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  letter-spacing: -.01em;
+  transition: opacity .15s;
+}
+
+.linkBtn:hover { opacity: .75; }
+.linkBtn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ── Password visibility toggle ── */
+.pwWrap {
+  position: relative;
+}
+
+.pwWrap :global(.input) {
+  padding-right: 40px;
+}
+
+.eyeBtn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  transition: color .15s;
+}
+.eyeBtn:hover { color: var(--text-1); }
