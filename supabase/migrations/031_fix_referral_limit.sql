@@ -115,5 +115,5 @@ BEGIN
 END;
 $$;
 
-REVOKE ALL ON FUNCTION public.register_member FROM public;
-GRANT EXECUTE ON FUNCTION public.register_member TO anon, authenticated;
+REVOKE ALL ON FUNCTION public.register_member(uuid,text,text,text,text,text,text,text,text) FROM public;
+GRANT EXECUTE ON FUNCTION public.register_member(uuid,text,text,text,text,text,text,text,text) TO anon, authenticated;

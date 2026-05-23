@@ -9,6 +9,12 @@ ALTER TABLE public.users
   ADD COLUMN IF NOT EXISTS semestre  text;
 
 -- 2. Atualiza register_member para aceitar e salvar os novos campos
+-- Drop todas versões anteriores antes de recriar
+DROP FUNCTION IF EXISTS public.register_member(uuid,text,text,text,text) CASCADE;
+DROP FUNCTION IF EXISTS public.register_member(uuid,text,text,text,text,text) CASCADE;
+DROP FUNCTION IF EXISTS public.register_member(uuid,text,text,text,text,boolean,text) CASCADE;
+DROP FUNCTION IF EXISTS public.register_member(uuid,text,text,text,text,text,text,text,text) CASCADE;
+
 CREATE OR REPLACE FUNCTION public.register_member(
   p_auth_id       uuid,
   p_nome          text,
@@ -71,5 +77,5 @@ BEGIN
 END;
 $fn$;
 
-COMMENT ON FUNCTION public.register_member IS
+COMMENT ON FUNCTION public.register_member(uuid,text,text,text,text,text,text,text,text) IS
   'Cria perfil em public.users. Retorna {id, ref_code}. Aceita faculdade, curso e semestre.';

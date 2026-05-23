@@ -6,18 +6,18 @@
 -- ── Experiences ──
 insert into public.experiences (id, name, category, description) values
   ('exp_weeknd',      'Show The Weeknd',          'cultura',    '2 ingressos · After Hours Til Dawn · Allianz Parque SP'),
-  ('exp_techsummit',  'Tech Summit SP',            'tech',       'Conferência de tecnologia com 40+ palestras'),
-  ('exp_startup',     'Startup Weekend',           'tech',       'Hackathon de 54h para lançar seu produto'),
+  ('exp_techsummit',  'Tech Summit SP',            'tecnologia',       'Conferência de tecnologia com 40+ palestras'),
+  ('exp_startup',     'Startup Weekend',           'tecnologia',       'Hackathon de 54h para lançar seu produto'),
   ('exp_teatro',      'Peça Teatro Municipal',     'arte',       'Apresentação exclusiva no Teatro Municipal de SP'),
   ('exp_museu',       'Museu do Amanhã RJ',        'cultura',    'Visita guiada exclusiva para membros'),
   ('exp_crossfit',    'CrossFit Open',             'esportes',   'Competição aberta de CrossFit — vagas limitadas'),
   ('exp_maratona',    'Maratona de SP',            'esportes',   'Inscrição para a Maratona Internacional de São Paulo'),
   ('exp_workshop',    'Workshop UX Design',        'carreira',   'Workshop intensivo de UX com especialistas'),
   ('exp_mentoria',    'Mentoria Carreiras Tech',   'carreira',   'Sessão de mentoria 1:1 com líderes de tech'),
-  ('exp_networking',  'Happy Hour Networking',     'networking', 'Encontro mensal de profissionais do mercado'),
+  ('exp_networking',  'Happy Hour Networking',     'negocios', 'Encontro mensal de profissionais do mercado'),
   ('exp_investimento','Painel de Investimentos',   'carreira',   'Talk com gestores e especialistas em finanças'),
-  ('exp_cinema',      'Pré-estreia Exclusiva',     'lazer',      'Sessão privada de pré-estreia para membros'),
-  ('exp_gastronomia', 'Jantar Degustação',         'lazer',      'Menu degustação 6 tempos em restaurante premiado'),
+  ('exp_cinema',      'Pré-estreia Exclusiva',     'lifestyle',      'Sessão privada de pré-estreia para membros'),
+  ('exp_gastronomia', 'Jantar Degustação',         'lifestyle',      'Menu degustação 6 tempos em restaurante premiado'),
   ('exp_surfcamp',    'Surf Camp Guarujá',         'esportes',   'Final de semana de surf com aulas e hospedagem'),
   ('exp_expo',        'Exposição Arte Moderna',    'arte',       'Visita guiada à exposição temporária no MASP')
 on conflict (id) do nothing;

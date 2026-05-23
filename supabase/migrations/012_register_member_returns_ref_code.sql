@@ -4,6 +4,11 @@
 -- sem fazer uma segunda query ao banco.
 -- ════════════════════════════════════════
 
+-- Drop necessário para mudar o tipo de retorno
+DROP FUNCTION IF EXISTS public.register_member(uuid, text, text, text, text) CASCADE;
+DROP FUNCTION IF EXISTS public.register_member(uuid, text, text, text, text, text) CASCADE;
+DROP FUNCTION IF EXISTS public.register_member(uuid, text, text, text, text, boolean, text) CASCADE;
+
 create or replace function public.register_member(
   p_auth_id       uuid,
   p_nome          text,

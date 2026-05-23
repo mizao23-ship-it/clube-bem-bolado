@@ -113,6 +113,12 @@ SET indicados = (
 --   • Removido UPDATE indicados+1  ← evita duplo incremento com trigger 009
 --   • referral_used = true ainda atualizado aqui (o trigger não faz isso)
 --
+-- Drop todas versões anteriores antes de recriar
+DROP FUNCTION IF EXISTS public.register_member(uuid,text,text,text,text) CASCADE;
+DROP FUNCTION IF EXISTS public.register_member(uuid,text,text,text,text,text) CASCADE;
+DROP FUNCTION IF EXISTS public.register_member(uuid,text,text,text,text,boolean,text) CASCADE;
+DROP FUNCTION IF EXISTS public.register_member(uuid,text,text,text,text,text,text,text,text) CASCADE;
+
 CREATE OR REPLACE FUNCTION public.register_member(
   p_auth_id          uuid    DEFAULT NULL,
   p_nome             text    DEFAULT NULL,
@@ -218,5 +224,3 @@ END;
 $$;
 
 -- ── 7. Garante permissões corretas ───────────────────────────
-REVOKE ALL ON FUNCTION public.register_member FROM public;
-GRANT EXECUTE ON FUNCTION public.register_member TO anon, authenticated;

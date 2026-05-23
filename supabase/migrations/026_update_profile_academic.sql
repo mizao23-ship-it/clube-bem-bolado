@@ -2,6 +2,10 @@
 -- 026 — update_profile com campos acadêmicos
 -- ══════════════════════════════════════════
 
+-- Drop versão anterior (2 params) antes de recriar com 5 params
+DROP FUNCTION IF EXISTS public.update_profile(text,text) CASCADE;
+DROP FUNCTION IF EXISTS public.update_profile(text,text,text,text,text) CASCADE;
+
 CREATE OR REPLACE FUNCTION public.update_profile(
   p_nome      text DEFAULT NULL,
   p_telefone  text DEFAULT NULL,
@@ -26,5 +30,5 @@ BEGIN
 END;
 $$;
 
-REVOKE ALL ON FUNCTION public.update_profile FROM public;
-GRANT EXECUTE ON FUNCTION public.update_profile TO authenticated;
+REVOKE ALL ON FUNCTION public.update_profile(text,text,text,text,text) FROM public;
+GRANT EXECUTE ON FUNCTION public.update_profile(text,text,text,text,text) TO authenticated;

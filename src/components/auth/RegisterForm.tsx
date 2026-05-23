@@ -1,181 +1,12 @@
-import { useState, useEffect, useRef, FormEvent } from 'react'
+import { useState, useEffect, FormEvent } from 'react'
 import { supabase } from '@/lib/supabase'
 import { getClientInfo, logMemberAuth } from '@/lib/auditLog'
 import { useAuth } from '@/contexts/AuthContext'
-import { CURSOS } from '@/lib/cursos'
 import styles from './AuthForm.module.css'
 import cStyles from './RegisterForm.module.css'
 import logo from '@/assets/logo-bem-bolado.svg'
 
 /* ── Dados ── */
-const FACULDADES = [
-  'Universidade de São Paulo (USP)',
-  'Universidade Federal de São Paulo (UNIFESP)',
-  'Universidade Presbiteriana Mackenzie',
-  'Pontifícia Universidade Católica de São Paulo (PUC-SP)',
-  'Fundação Getulio Vargas (FGV)',
-  'Insper Instituto de Ensino e Pesquisa',
-  'FAAP (Fundação Armando Alvares Penteado)',
-  'ESPM (Escola Superior de Propaganda e Marketing)',
-  'FIAP (Faculdade de Informática e Administração Paulista)',
-  'FECAP (Fundação Escola de Comércio Álvares Penteado)',
-  'Universidade Paulista (UNIP)',
-  'Universidade Nove de Julho (UNINOVE)',
-  'Universidade Cruzeiro do Sul',
-  'Universidade Cidade de São Paulo (UNICID)',
-  'Universidade São Judas Tadeu',
-  'Universidade Anhembi Morumbi',
-  'Centro Universitário das Faculdades Metropolitanas Unidas (FMU)',
-  'Centro Universitário Senac',
-  'Centro Universitário Belas Artes de São Paulo',
-  'Centro Universitário São Camilo',
-  'Centro Universitário Ítalo Brasileiro',
-  "Centro Universitário Sant'Anna",
-  'Centro Universitário Paulistano (UNIPAULISTANA)',
-  'Centro Universitário Sumaré',
-  'Faculdade Cásper Líbero',
-  'Faculdade Santa Marcelina',
-  'Faculdade Sumaré',
-  'Faculdade Impacta de Tecnologia',
-  'Faculdade Méliès',
-  'Faculdade Trevisan',
-  'Faculdade Sebrae',
-  'Faculdade Zumbi dos Palmares',
-  'Faculdade São Bento',
-  'Faculdade Paulus (FAPCOM)',
-  'Faculdade ESEG (Grupo Etapa)',
-  'Faculdade Saint Paul',
-  'Faculdade FIA de Administração e Negócios',
-  'Faculdade INSPER',
-  'Faculdade Drummond (Carlos Drummond de Andrade)',
-  'Faculdade Flamingo',
-  'Faculdade Campos Salles',
-  'Faculdade Mozarteum de São Paulo',
-  'Faculdade Integrada Cantareira',
-  'Faculdade Paschoal Dantas',
-  'Faculdade Sequencial',
-  'Faculdade Unida de São Paulo',
-  'Faculdade Brasil',
-  'Faculdade Legale',
-  'Instituto Federal de São Paulo (IFSP)',
-  'Centro Paula Souza (FATEC / ETEC)',
-  'UNIVESP (Universidade Virtual do Estado de São Paulo)',
-  'Claretiano Centro Universitário',
-  'IBMEC São Paulo',
-  'Instituto Mauá de Tecnologia',
-  'Instituto Singularidades',
-  'Instituto Vera Cruz',
-  'Escola Superior de Sociologia e Política (FESPSP)',
-  'Escola de Direito de São Paulo (FGV Direito SP)',
-  'Escola de Economia de São Paulo (FGV EESP)',
-  'Escola Paulista de Direito (EPD)',
-  'Escola Brasileira de Administração Pública e de Empresas (FGV EBAPE)',
-  'Senac São Paulo',
-  'Senai São Paulo',
-  'FAM (Faculdade das Américas)',
-  'Unisa (Universidade de Santo Amaro)',
-  'UniFECAF (Centro Universitário UniFECAF)',
-  'Outros',
-]
-
-const SEMESTRES = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
-
-/* ── Combobox com busca ── */
-function Combobox({
-  id,
-  placeholder,
-  options,
-  value,
-  onChange,
-}: {
-  id: string
-  placeholder: string
-  options: string[]
-  value: string
-  onChange: (v: string) => void
-}) {
-  const [query, setQuery] = useState('')
-  const [open, setOpen] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-
-  const filtered = query.trim()
-    ? options.filter(o => o.toLowerCase().includes(query.toLowerCase()))
-    : options
-
-  // Fecha ao clicar fora
-  useEffect(() => {
-    function handler(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
-    }
-    document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
-  }, [])
-
-  function select(opt: string) {
-    onChange(opt)
-    setQuery('')
-    setOpen(false)
-  }
-
-  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setQuery(e.target.value)
-    onChange('')        // limpa seleção ao digitar
-    setOpen(true)
-  }
-
-  function handleFocus() {
-    setOpen(true)
-  }
-
-  const displayValue = value || query
-
-  return (
-    <div ref={ref} className={cStyles.comboWrap}>
-      <div className={`${cStyles.comboInput} ${value ? cStyles.comboSelected : ''}`}>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className={cStyles.comboIcon}>
-          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-        <input
-          id={id}
-          type="text"
-          placeholder={placeholder}
-          value={displayValue}
-          onChange={handleInputChange}
-          onFocus={handleFocus}
-          autoComplete="off"
-          className={cStyles.comboText}
-        />
-        {value && (
-          <button
-            type="button"
-            className={cStyles.comboClear}
-            onClick={() => { onChange(''); setQuery(''); setOpen(false) }}
-            aria-label="Limpar"
-          >×</button>
-        )}
-      </div>
-
-      {open && filtered.length > 0 && (
-        <ul className={cStyles.comboList}>
-          {filtered.slice(0, 80).map(opt => (
-            <li
-              key={opt}
-              className={`${cStyles.comboItem} ${opt === value ? cStyles.comboItemActive : ''}`}
-              onMouseDown={() => select(opt)}
-            >
-              {opt}
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {open && filtered.length === 0 && query.trim() && (
-        <div className={cStyles.comboEmpty}>Nenhuma opção encontrada</div>
-      )}
-    </div>
-  )
-}
-
 /* ── Força da senha ── */
 function passwordScore(p: string): number {
   let score = 0
@@ -222,9 +53,7 @@ export default function RegisterForm({ onSwitch }: Props) {
   const [senha, setSenha] = useState('')
   const [confirmar, setConfirmar] = useState('')
   const [codigoIndicacao, setCodigoIndicacao] = useState('')
-  const [faculdade, setFaculdade] = useState('')
-  const [curso, setCurso] = useState('')
-  const [semestre, setSemestre] = useState('')
+
   const [showSenha, setShowSenha] = useState(false)
   const [showConfirmar, setShowConfirmar] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -253,18 +82,7 @@ export default function RegisterForm({ onSwitch }: Props) {
       setError('Telefone (WhatsApp) é obrigatório.')
       return
     }
-    if (!faculdade) {
-      setError('Selecione sua faculdade.')
-      return
-    }
-    if (!curso) {
-      setError('Selecione seu curso.')
-      return
-    }
-    if (!semestre) {
-      setError('Selecione seu semestre.')
-      return
-    }
+
     if (passwordScore(senha) < 4) {
       setError('A senha deve ter no mínimo 8 caracteres, incluindo letra maiúscula, minúscula e número.')
       return
@@ -301,9 +119,7 @@ export default function RegisterForm({ onSwitch }: Props) {
         p_email:         email.trim().toLowerCase(),
         p_telefone:      telefone.trim() || null,
         p_referral_code: codigoIndicacao.trim() || null,
-        p_faculdade:     faculdade,
-        p_curso:         curso,
-        p_semestre:      semestre,
+
         p_ip_address:    ip,
       })
 
@@ -340,9 +156,6 @@ export default function RegisterForm({ onSwitch }: Props) {
               nome:      nome.trim(),
               email:     email.trim().toLowerCase(),
               telefone:  telefone.trim() || null,
-              faculdade,
-              curso,
-              semestre,
             },
           })
           .then(({ error }) => {
@@ -451,47 +264,7 @@ export default function RegisterForm({ onSwitch }: Props) {
         />
       </div>
 
-      {/* ── Dados Acadêmicos ── */}
-      <div className={cStyles.academicSection}>
-        <div className={cStyles.academicLabel}>Dados acadêmicos</div>
 
-        <div className="form-group">
-          <label htmlFor="reg-faculdade">Faculdade *</label>
-          <Combobox
-            id="reg-faculdade"
-            placeholder="Buscar faculdade…"
-            options={FACULDADES}
-            value={faculdade}
-            onChange={setFaculdade}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="reg-curso">Curso *</label>
-          <Combobox
-            id="reg-curso"
-            placeholder="Buscar curso…"
-            options={CURSOS}
-            value={curso}
-            onChange={setCurso}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="reg-semestre">Semestre *</label>
-          <select
-            id="reg-semestre"
-            className="input"
-            value={semestre}
-            onChange={e => setSemestre(e.target.value)}
-          >
-            <option value="">Selecione o semestre</option>
-            {SEMESTRES.map(s => (
-              <option key={s} value={s}>{s}º semestre</option>
-            ))}
-          </select>
-        </div>
-      </div>
 
       <div className="form-row">
         <div className="form-group">

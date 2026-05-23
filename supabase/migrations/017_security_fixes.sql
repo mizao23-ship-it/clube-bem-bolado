@@ -35,8 +35,8 @@ BEGIN
 END;
 $$;
 
-REVOKE ALL ON FUNCTION public.update_profile FROM public;
-GRANT EXECUTE ON FUNCTION public.update_profile TO authenticated;
+REVOKE ALL ON FUNCTION public.update_profile(text,text) FROM public;
+GRANT EXECUTE ON FUNCTION public.update_profile(text,text) TO authenticated;
 
 -- ── VULN 2: register_member valida auth_id ───────────────────
 CREATE OR REPLACE FUNCTION public.register_member(
@@ -137,5 +137,3 @@ BEGIN
 END;
 $$;
 
-REVOKE ALL ON FUNCTION public.register_member FROM public;
-GRANT EXECUTE ON FUNCTION public.register_member TO anon, authenticated;

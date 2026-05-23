@@ -7,7 +7,7 @@
 -- Tabela de inscrições com dados de auditoria (canal, ip, user_agent)
 CREATE TABLE IF NOT EXISTS public.sorteio_inscricoes (
   id            uuid        DEFAULT gen_random_uuid() PRIMARY KEY,
-  experience_id uuid        NOT NULL REFERENCES public.experiences(id) ON DELETE CASCADE,
+  experience_id text        NOT NULL REFERENCES public.experiences(id) ON DELETE CASCADE,
   user_id       uuid        NOT NULL REFERENCES public.users(id)       ON DELETE CASCADE,
   inscrito_em   timestamptz NOT NULL DEFAULT now(),
   ip_inscricao  inet,
@@ -123,23 +123,23 @@ WHERE NOT EXISTS (
   WHERE si.experience_id = p.experience_id AND si.user_id = p.user_id
 );
 
--- ── 6. Migrate sorteio_winners → sorteio_ganhadores ───────
-INSERT INTO public.sorteio_ganhadores
-  (sorteio_id, user_id, posicao, status, notificado_em, seen_at)
-SELECT
-  sw.sorteio_id,
-  sw.user_id,
-  1,
-  CASE WHEN sw.seen_at IS NOT NULL THEN 'confirmado' ELSE 'notificado' END,
-  sw.resultado_at,
-  sw.seen_at
-FROM public.sorteio_winners sw
-WHERE NOT EXISTS (
-  SELECT 1 FROM public.sorteio_ganhadores sg
-  WHERE sg.sorteio_id = sw.sorteio_id AND sg.user_id = sw.user_id
-)
-ON CONFLICT DO NOTHING;
-
+-- SKIP (fresh install): -- ── 6. Migrate sorteio_winners → sorteio_ganhadores ───────
+-- INSERT INTO public.sorteio_ganhadores
+--   (sorteio_id, user_id, posicao, status, notificado_em, seen_at)
+-- SELECT
+--   sw.sorteio_id,
+--   sw.user_id,
+--   1,
+--   CASE WHEN sw.seen_at IS NOT NULL THEN 'confirmado' ELSE 'notificado' END,
+--   sw.resultado_at,
+--   sw.seen_at
+-- FROM public.sorteio_winners sw
+-- WHERE NOT EXISTS (
+--   SELECT 1 FROM public.sorteio_ganhadores sg
+--   WHERE sg.sorteio_id = sw.sorteio_id AND sg.user_id = sw.user_id
+-- )
+-- ON CONFLICT DO NOTHING;
+-- 
 -- ── 7. executar_sorteio RPC ───────────────────────────────
 -- Realiza o sorteio server-side, grava auditoria completa.
 -- Chama esta RPC no lugar do insert manual em sorteio_winners.
@@ -223,10 +223,10 @@ BEGIN
       (p_sorteio_id, v_ganhadores[i], i, 'notificado', now(), now() + interval '72 hours')
     ON CONFLICT DO NOTHING;
 
-    -- Compatibilidade: mantém sorteio_winners populado
-    INSERT INTO public.sorteio_winners (sorteio_id, user_id)
-    VALUES (p_sorteio_id, v_ganhadores[i])
-    ON CONFLICT DO NOTHING;
+    -- Compatibilidade: desabilitado (fresh install, tabela não existe)
+    -- INSERT INTO public.sorteio_winners (sorteio_id, user_id)
+    -- VALUES (p_sorteio_id, v_ganhadores[i])
+    -- ON CONFLICT DO NOTHING;
   END LOOP;
 
   -- Log de auditoria
