@@ -66,6 +66,32 @@
   text-align: left;
 }
 
+.pwWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.pwWrap :global(.input) {
+  padding-right: 44px;
+  width: 100%;
+}
+
+.eyeBtn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-3);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.eyeBtn:hover { color: var(--text-1); }
+
 .submitBtn {
   width: 100%;
   justify-content: center;
