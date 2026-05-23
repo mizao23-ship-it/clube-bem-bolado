@@ -4,6 +4,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import AuthCard from '@/components/auth/AuthCard'
 import { getClientInfo, logLinkClick } from '@/lib/auditLog'
 import styles from './Home.module.css'
+import heroBg from '@/assets/hero-bembolado.webp'
 
 export default function Home() {
   const { session, isMember, loading } = useAuth()
@@ -29,7 +30,9 @@ export default function Home() {
   return (
     <div className={styles.layout}>
       {/* ── Hero ── */}
-      <div className={styles.hero} />
+      <div className={styles.hero}>
+        <img src={heroBg} alt="Clube Bem Bolado" className={styles.heroImg} />
+      </div>
 
       {/* ── Form ── */}
       <div className={styles.formSide}>
