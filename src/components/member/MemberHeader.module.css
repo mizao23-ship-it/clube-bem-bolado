@@ -27,6 +27,9 @@
 .logoImg {
   height: 36px;
   width: auto;
+  background: #7B2FBE;
+  border-radius: 30px;
+  padding: 6px 14px;
 }
 
 .nav {
@@ -116,7 +119,7 @@
   .inner { padding: 0 12px; gap: 8px; }
   .userName { display: none; }
   .navLink { padding: 6px 10px; font-size: 12.5px; }
-  .logoImg { height: 28px; }
+  .logoImg { height: 28px; padding: 5px 10px; }
   /* Sair some do header no mobile — logout fica na página de Perfil */
   .logoutBtn { display: none; }
 }

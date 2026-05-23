@@ -61,6 +61,9 @@
 .logoImg {
   height: 32px;
   width: auto;
+  background: #7B2FBE;
+  border-radius: 28px;
+  padding: 5px 14px;
 }
 
 .logoTag {
