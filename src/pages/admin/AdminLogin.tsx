@@ -67,24 +67,30 @@ export default function AdminLogin() {
   return (
     <div className={styles.page}>
       <div className={styles.card}>
-        <img src={logo} alt="Clube Bem Bolado" className={styles.logoImg} />
-        <div className={styles.sub}>Backoffice · Acesso restrito</div>
+        {/* Faixa roxa com logo */}
+        <div className={styles.logoStrip}>
+          <img src={logo} alt="Clube Bem Bolado" />
+        </div>
 
-        {error && <div className={styles.errorBox}>{error}</div>}
+        <div className={styles.cardBody}>
+          <div className={styles.sub}>Backoffice · Acesso restrito</div>
 
-        <form onSubmit={handleSubmit} noValidate>
-          <div className="form-group">
-            <label htmlFor="al-email">E-mail</label>
-            <input id="al-email" className="input" type="email" placeholder="admin@empresa.com" value={email} onChange={e => setEmail(e.target.value)} required autoComplete="email"/>
-          </div>
-          <div className="form-group">
-            <label htmlFor="al-senha">Senha</label>
-            <input id="al-senha" className="input" type="password" placeholder="Sua senha" value={senha} onChange={e => setSenha(e.target.value)} required autoComplete="current-password"/>
-          </div>
-          <button type="submit" className={`btn btn-primary ${styles.submitBtn}`} disabled={loading}>
-            {loading ? <span className="spinner" /> : 'Entrar no backoffice'}
-          </button>
-        </form>
+          {error && <div className={styles.errorBox}>{error}</div>}
+
+          <form onSubmit={handleSubmit} noValidate>
+            <div className="form-group">
+              <label htmlFor="al-email">E-mail</label>
+              <input id="al-email" className="input" type="email" placeholder="admin@empresa.com" value={email} onChange={e => setEmail(e.target.value)} required autoComplete="email"/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="al-senha">Senha</label>
+              <input id="al-senha" className="input" type="password" placeholder="Sua senha" value={senha} onChange={e => setSenha(e.target.value)} required autoComplete="current-password"/>
+            </div>
+            <button type="submit" className={`btn btn-primary ${styles.submitBtn}`} disabled={loading}>
+              {loading ? <span className="spinner" /> : 'Entrar no backoffice'}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   )
