@@ -11,7 +11,9 @@
 .hero {
   position: relative;
   overflow: hidden;
-  background: var(--bg);
+  background: #7B2FBE;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
 }
 
 .heroImg {
@@ -41,7 +43,9 @@
 
 /* ── Form side ── */
 .formSide {
-  background: var(--bg);
+  background: #F5EEFF;
+  background-image: radial-gradient(circle, #DCC4F5 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
   display: flex;
   flex-direction: column;
   align-items: center;

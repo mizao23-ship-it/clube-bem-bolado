@@ -57,15 +57,15 @@
 .btn:disabled { opacity: .4; cursor: not-allowed; transform: none !important; }
 
 .btn-primary {
-  background: linear-gradient(135deg, #7E00E5, #4D0798);
+  background: linear-gradient(135deg, #CC3DB9, #9B2FBE);
   border-color: transparent;
   color: white;
-  box-shadow: 0 2px 10px rgba(126,0,229,.35);
+  box-shadow: 0 2px 10px rgba(204,61,185,.35);
 }
 .btn-primary:hover {
-  background: linear-gradient(135deg, #6a00c4, #3d0076);
+  background: linear-gradient(135deg, #B530A5, #7B2FBE);
   color: white;
-  box-shadow: 0 4px 18px rgba(126,0,229,.45);
+  box-shadow: 0 4px 18px rgba(204,61,185,.48);
 }
 
 .btn-danger {
@@ -294,7 +294,7 @@ code {
 
 /* ════ PROGRESS ════ */
 .progress { height: 5px; background: var(--surface-2); border-radius: 99px; overflow: hidden; }
-.progress-fill { height: 100%; background: linear-gradient(90deg, #7E00E5, #4D0798); border-radius: 99px; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #7B2FBE, #CC3DB9); border-radius: 99px; }
 
 /* ════ DIVIDER ════ */
 .divider { height: 1px; background: var(--border); margin-bottom: 18px; }
