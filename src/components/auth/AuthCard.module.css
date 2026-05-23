@@ -7,19 +7,36 @@
   background: #ffffff;
   border-radius: 24px;
   box-shadow: 0 8px 40px rgba(123,47,190,.18);
-  padding: 40px 40px 36px;
+  padding: 0;
   width: 100%;
   max-width: 460px;
   border: 2px solid #EDD9FF;
+  overflow: hidden;
+}
+
+.logoStrip {
+  background: #7B2FBE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 32px;
+}
+
+.logoStrip img {
+  height: 56px;
+  width: auto;
+  display: block;
 }
 
 .formWrap {
-  /* chave de animação está no inline style no component */
+  padding: 36px 40px 36px;
 }
 
 @media (max-width: 520px) {
   .card {
-    padding: 32px 24px 28px;
     border-radius: var(--radius-lg);
+  }
+  .formWrap {
+    padding: 28px 24px 32px;
   }
 }

@@ -4,7 +4,6 @@ import { getClientInfo, logMemberAuth } from '@/lib/auditLog'
 import { useAuth } from '@/contexts/AuthContext'
 import styles from './AuthForm.module.css'
 import cStyles from './RegisterForm.module.css'
-import logo from '@/assets/logo-bem-bolado.svg'
 
 /* ── Dados ── */
 /* ── Força da senha ── */
@@ -187,7 +186,6 @@ export default function RegisterForm({ onSwitch }: Props) {
   return (
     <form onSubmit={handleSubmit} noValidate>
       <div className={styles.header}>
-        <img src={logo} alt="Clube Bem Bolado" className={styles.logoImg} />
         <h1 className={styles.title}>Criar conta</h1>
         <p className={styles.subtitle}>Você foi convidado a fazer parte dessa comunidade exclusiva, onde os universitários vivem o extraordinário!</p>
       </div>

@@ -3,15 +3,6 @@
   margin-bottom: 28px;
 }
 
-.logoImg {
-  height: 52px;
-  width: auto;
-  display: block;
-  margin: 0 auto 20px;
-  background: #7B2FBE;
-  border-radius: 40px;
-  padding: 10px 22px;
-}
 
 .title {
   font-family: var(--font-heading);

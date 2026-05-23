@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { supabase } from '@/lib/supabase'
 import { getClientInfo, logMemberAuth, logAuthEventPublic } from '@/lib/auditLog'
 import styles from './AuthForm.module.css'
-import logo from '@/assets/logo-bem-bolado.svg'
 
 interface Props {
   onSwitch: () => void
@@ -66,7 +65,6 @@ export default function LoginForm({ onSwitch }: Props) {
   return (
     <form onSubmit={handleSubmit} noValidate>
       <div className={styles.header}>
-        <img src={logo} alt="Clube Bem Bolado" className={styles.logoImg} />
         <h1 className={styles.title}>Bem-vindo de volta</h1>
         <p className={styles.subtitle}>Acesse sua conta para continuar</p>
       </div>
