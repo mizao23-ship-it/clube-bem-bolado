@@ -158,15 +158,6 @@ function ExpCard({ item, onSortear, onDetail, onEdit, onOcultar, onDelete }: { i
             {s.status === 'encerrado' && (
               <div style={{ color: 'var(--success)', fontSize: 12, marginTop: 8, fontWeight: 600 }}>✓ Sorteio realizado</div>
             )}
-            {s?.status !== 'encerrado' && (
-              <button
-                className="btn btn-secondary"
-                style={{ marginTop: 8, width: '100%', fontSize: 12 }}
-                onClick={e => { e.stopPropagation(); onEdit() }}
-              >
-                ✏️ Editar experiência
-              </button>
-            )}
             {canOcultar && (
               <button
                 className="btn btn-secondary"
@@ -191,10 +182,17 @@ function ExpCard({ item, onSortear, onDetail, onEdit, onOcultar, onDelete }: { i
           <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 10 }}>Sem sorteio configurado</div>
         )}
 
-        {/* Botão excluir — sempre disponível */}
+        {/* Botões sempre disponíveis */}
+        <button
+          className="btn btn-secondary"
+          style={{ marginTop: 10, width: '100%', fontSize: 12 }}
+          onClick={e => { e.stopPropagation(); onEdit() }}
+        >
+          ✏️ Editar experiência
+        </button>
         <button
           className="btn"
-          style={{ marginTop: 10, width: '100%', fontSize: 12, color: 'var(--danger)', borderColor: 'var(--danger)' }}
+          style={{ marginTop: 6, width: '100%', fontSize: 12, color: 'var(--danger)', borderColor: 'var(--danger)' }}
           onClick={e => { e.stopPropagation(); onDelete() }}
         >
           🗑️ Excluir experiência
