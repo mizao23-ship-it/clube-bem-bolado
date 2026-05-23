@@ -17,6 +17,7 @@ export default function Sorteios() {
   const [sortearItem, setSortearItem] = useState<ExpWithSorteio | null>(null)
   const [detailItem, setDetailItem] = useState<ExpWithSorteio | null>(null)
   const [editItem, setEditItem] = useState<ExpWithSorteio | null>(null)
+  const [deleteItem, setDeleteItem] = useState<ExpWithSorteio | null>(null)
 
   useEffect(() => { load() }, [])
 
@@ -68,6 +69,7 @@ export default function Sorteios() {
               onSortear={() => setSortearItem(item)}
               onDetail={() => setDetailItem(item)}
               onEdit={() => setEditItem(item)}
+              onDelete={() => setDeleteItem(item)}
               onOcultar={async () => {
                 await supabase
                   .from('experiences')
@@ -89,13 +91,14 @@ export default function Sorteios() {
       {sortearItem && <SortearModal item={sortearItem} onClose={() => { setSortearItem(null); load() }} />}
       {detailItem && <DetailModal item={detailItem} onClose={() => setDetailItem(null)} />}
       {editItem && <EditExperienceModal item={editItem} onClose={() => { setEditItem(null); load() }} />}
+      {deleteItem && <DeleteExperienceModal item={deleteItem} onClose={() => { setDeleteItem(null); load() }} />}
     </div>
   )
 }
 
 // ── Experience card (admin) ──────────────────────────────────────────────────
 
-function ExpCard({ item, onSortear, onDetail, onEdit, onOcultar }: { item: ExpWithSorteio; onSortear: () => void; onDetail: () => void; onEdit: () => void; onOcultar: () => void }) {
+function ExpCard({ item, onSortear, onDetail, onEdit, onOcultar, onDelete }: { item: ExpWithSorteio; onSortear: () => void; onDetail: () => void; onEdit: () => void; onOcultar: () => void; onDelete: () => void }) {
   const s = item.sorteio
   const canSortear = s && s.status !== 'encerrado' && s.draw_date && new Date(s.draw_date) <= new Date()
   const canOcultar = s?.status === 'encerrado' && !item.oculto_em
@@ -187,6 +190,15 @@ function ExpCard({ item, onSortear, onDetail, onEdit, onOcultar }: { item: ExpWi
         ) : (
           <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 10 }}>Sem sorteio configurado</div>
         )}
+
+        {/* Botão excluir — sempre disponível */}
+        <button
+          className="btn"
+          style={{ marginTop: 10, width: '100%', fontSize: 12, color: 'var(--danger)', borderColor: 'var(--danger)' }}
+          onClick={e => { e.stopPropagation(); onDelete() }}
+        >
+          🗑️ Excluir experiência
+        </button>
       </div>
     </div>
   )
@@ -933,6 +945,84 @@ function SortearModal({ item, onClose }: { item: ExpWithSorteio; onClose: () => 
               <span className="spinner" /> Sorteando…
             </button>
           )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── Delete experience modal ──────────────────────────────────────────────────
+
+function DeleteExperienceModal({ item, onClose }: { item: ExpWithSorteio; onClose: () => void }) {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  async function handleDelete() {
+    setLoading(true)
+    setError('')
+    try {
+      // 1. Excluir ganhadores do sorteio (sorteio_ganhadores.sorteio_id tem ON DELETE CASCADE,
+      //    mas precisamos deletar sorteios manualmente primeiro pois sorteios.experience_id
+      //    pode não ter CASCADE)
+      if (item.sorteio) {
+        const { error: sgErr } = await supabase
+          .from('sorteio_ganhadores')
+          .delete()
+          .eq('sorteio_id', item.sorteio.id)
+        if (sgErr) throw new Error(`Erro ao excluir ganhadores: ${sgErr.message}`)
+
+        const { error: sErr } = await supabase
+          .from('sorteios')
+          .delete()
+          .eq('id', item.sorteio.id)
+        if (sErr) throw new Error(`Erro ao excluir sorteio: ${sErr.message}`)
+      }
+
+      // 2. Excluir a experiência — participations e sorteio_inscricoes têm
+      //    ON DELETE CASCADE e serão removidos automaticamente pelo banco
+      const { error: delErr } = await supabase.from('experiences').delete().eq('id', item.id)
+      if (delErr) throw new Error(delErr.message)
+
+      logAdminAction('experiencia_excluida', {
+        entidade: 'experience',
+        entidade_id: item.id,
+        descricao: `Excluiu experiência "${item.name}"`,
+      })
+
+      onClose()
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Erro ao excluir.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="modal-backdrop open">
+      <div className="modal" style={{ maxWidth: 440 }}>
+        <div className="modal-title">Excluir experiência?</div>
+        <p style={{ fontSize: 14, color: 'var(--text-2)', margin: '8px 0 16px' }}>
+          A experiência <strong>"{item.name}"</strong> será excluída permanentemente,
+          incluindo {item.enrolled_count > 0 && <><strong>{item.enrolled_count} inscrição(ões)</strong> e </>}
+          o sorteio vinculado. Esta ação não pode ser desfeita.
+        </p>
+
+        {error && (
+          <div style={{ background: 'var(--danger-bg)', color: 'var(--danger)', borderRadius: 10, padding: '10px 14px', fontSize: 13, marginBottom: 14 }}>
+            {error}
+          </div>
+        )}
+
+        <div className="modal-footer">
+          <button className="btn" onClick={onClose} disabled={loading}>Cancelar</button>
+          <button
+            className="btn"
+            style={{ background: 'var(--danger)', color: '#fff', borderColor: 'var(--danger)' }}
+            onClick={handleDelete}
+            disabled={loading}
+          >
+            {loading ? <span className="spinner" /> : '🗑️ Excluir'}
+          </button>
         </div>
       </div>
     </div>
