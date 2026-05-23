@@ -1,10 +1,14 @@
+@keyframes headerFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .header {
-  background: #ffffff;
+  background: #7B2FBE;
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid #e5e7eb;
-  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  box-shadow: 0 2px 12px rgba(123,47,190,.35);
 }
 
 .inner {
@@ -25,17 +29,14 @@
 }
 
 .logoImg {
-  height: 36px;
+  height: 38px;
   width: auto;
-  background: #7B2FBE;
-  border-radius: 30px;
-  padding: 6px 14px;
 }
 
 .nav {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
   flex: 1;
 }
 
@@ -45,15 +46,23 @@
   font-family: var(--font-body);
   font-size: 13.5px;
   font-weight: 500;
-  color: #6b7280;
+  color: rgba(255,255,255,0.75);
   cursor: pointer;
   padding: 6px 14px;
   border-radius: 8px;
   transition: all .15s;
 }
 
-.navLink:hover { background: #f3f4f6; color: #111827; }
-.navLink.active { background: #f3f0ff; color: #7E00E5; font-weight: 600; }
+.navLink:hover {
+  background: rgba(255,255,255,0.15);
+  color: #ffffff;
+}
+
+.navLink.active {
+  background: rgba(255,255,255,0.2);
+  color: #ffffff;
+  font-weight: 700;
+}
 
 .userArea {
   display: flex;
@@ -74,17 +83,15 @@
   transition: background 0.15s;
 }
 .avatarBtn:hover {
-  background: #f3f0ff;
-}
-.avatarBtn:hover .userName {
-  color: #7E00E5;
+  background: rgba(255,255,255,0.15);
 }
 
 .avatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #7E00E5, #4D0798);
+  background: rgba(255,255,255,0.25);
+  border: 2px solid rgba(255,255,255,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,29 +104,32 @@
 .userName {
   font-size: 13px;
   font-weight: 600;
-  color: #374151;
+  color: rgba(255,255,255,0.9);
 }
 
 .logoutBtn {
-  background: #f3f4f6;
-  border: 1px solid #e5e7eb;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
   border-radius: 8px;
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 500;
-  color: #6b7280;
+  color: rgba(255,255,255,0.85);
   cursor: pointer;
   padding: 5px 12px;
   transition: all .15s;
 }
 
-.logoutBtn:hover { background: #e5e7eb; color: #111827; }
+.logoutBtn:hover {
+  background: rgba(255,255,255,0.25);
+  color: #ffffff;
+  border-color: rgba(255,255,255,0.5);
+}
 
 @media (max-width: 600px) {
   .inner { padding: 0 12px; gap: 8px; }
   .userName { display: none; }
   .navLink { padding: 6px 10px; font-size: 12.5px; }
-  .logoImg { height: 28px; padding: 5px 10px; }
-  /* Sair some do header no mobile — logout fica na página de Perfil */
+  .logoImg { height: 30px; }
   .logoutBtn { display: none; }
 }
