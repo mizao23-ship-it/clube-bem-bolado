@@ -233,7 +233,7 @@ export default function Experiencias() {
       <div className={styles.hero}>
         <div className={styles.heroInner}>
           <div className={styles.greeting}>
-            <div className={styles.greetingHi}>E aí, {profile?.nome?.split(' ')[0]}! 👋</div>
+            <div className={styles.greetingHi}>E aí, {profile?.nome?.split(' ')[0]}! 🔥</div>
             <div className={styles.greetingSub}>Em qual role a gente se encontra?</div>
           </div>
           <div className={styles.heroRight}>
