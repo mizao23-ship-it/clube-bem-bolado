@@ -9,7 +9,7 @@ export default function StatsRow({ indicados, experiencias }: Props) {
   return (
     <div className={styles.row}>
       <div className={`${styles.stat} ${styles.statIndicacoes}`}>
-        <div className={styles.num}>{indicados}/1</div>
+        <div className={styles.num}>{indicados}</div>
         <div className={styles.label}>Indicações</div>
       </div>
       <div className={`${styles.divider} ${styles.dividerIndicacoes}`} />
