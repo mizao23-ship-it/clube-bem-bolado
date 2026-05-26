@@ -132,24 +132,6 @@ export default function RegisterForm({ onSwitch }: Props) {
       }
       if (memberData?.error) throw new Error(memberData.error)
 
-      // 3. Sync New Value (fire-and-forget)
-      if (memberData?.id) {
-        supabase.functions
-          .invoke('sync-newvalue', {
-            body: {
-              nome:     nome.trim(),
-              email:    email.trim().toLowerCase(),
-              telefone: telefone.trim() || null,
-              user_id:  memberData.id,
-              ref_code: memberData.ref_code,
-            },
-          })
-          .then(({ error }) => {
-            if (error) console.warn('[sync-newvalue]', error.message)
-          })
-
-      }
-
       // 5. Log de cadastro no auth_logs
       logMemberAuth('cadastro', { ip, ua, metadata: { email: email.trim().toLowerCase() } })
 

@@ -42,23 +42,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .eq('auth_id', uid)
       .maybeSingle()
     setProfile(data ?? null)
-
-    // Auto-sync na New Value se o usuário ainda não foi registrado lá
-    if (data && !data.nv_user_id) {
-      supabase.functions
-        .invoke('sync-newvalue', {
-          body: {
-            nome:     data.nome,
-            email:    data.email,
-            telefone: data.telefone ?? null,
-            user_id:  data.id,
-            ref_code: data.ref_code,
-          },
-        })
-        .then(({ error }) => {
-          if (error) console.warn('[sync-newvalue login]', error.message)
-        })
-    }
   }
 
   async function fetchTeamMember(_uid: string) {
