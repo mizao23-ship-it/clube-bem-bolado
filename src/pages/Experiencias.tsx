@@ -244,8 +244,8 @@ export default function Experiencias() {
               />
             </div>
             {profile?.ref_code && (
-              <div className={profile?.referral_used ? styles.referralUsedWrap : undefined}>
-                <ReferralBlock refCode={profile.ref_code} referralUsed={profile.referral_used ?? false} />
+              <div>
+                <ReferralBlock refCode={profile.ref_code} />
               </div>
             )}
           </div>

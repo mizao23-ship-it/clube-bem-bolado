@@ -50,7 +50,6 @@ export default function AnnouncementModal({ announcements, onAllDismissed }: Pro
     const seenThisSession: string[] = JSON.parse(sessionStorage.getItem(SESSION_KEY) ?? '[]')
     const filtered = announcements.filter(a => {
       if (a.veiculacao === 'por_sessao' && seenThisSession.includes(a.id)) return false
-      if (a.tipo === 'indicacao' && profile?.referral_used) return false
       return true
     })
     if (filtered.length === 0) { onAllDismissed(); return }
