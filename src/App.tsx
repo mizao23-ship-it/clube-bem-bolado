@@ -10,7 +10,6 @@ import AuthConfirm from '@/pages/AuthConfirm'
 
 // Páginas de membro
 import Experiencias from '@/pages/Experiencias'
-import Beneficios from '@/pages/Beneficios'
 import Perfil from '@/pages/Perfil'
 
 // Páginas admin
@@ -40,7 +39,6 @@ export default function App() {
           {/* ── Membro ── */}
           <Route element={<MemberRoute />}>
             <Route path="/experiencias" element={<Experiencias />} />
-            <Route path="/beneficios" element={<Beneficios />} />
             <Route path="/perfil" element={<Perfil />} />
           </Route>
 

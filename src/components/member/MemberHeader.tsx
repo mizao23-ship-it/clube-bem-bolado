@@ -31,12 +31,7 @@ export default function MemberHeader() {
           >
             Experiências
           </button>
-          <button
-            className={`${styles.navLink} ${location.pathname === '/beneficios' ? styles.active : ''}`}
-            onClick={() => navigate('/beneficios')}
-          >
-            Benefícios
-          </button>
+
         </nav>
 
         <div className={styles.userArea}>
